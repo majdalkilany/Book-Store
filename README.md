@@ -29,10 +29,7 @@
 
 # 📖 Book Store <a name="Portfolio-site"></a>
 
-"Math magicians" is a website for all fans of mathematics. It is a Single Page App (SPA) that allows users to:
-
-- Make simple calculations.
-- Read a random math-related quote.
+"Book Strore " is a website for all fans readings it allows the users to add or delete the book from there list
 
 ## Built With <a name="built-with"></a>
 
@@ -51,7 +48,7 @@ Javascript React.js CSS
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-See the Math-Magician project <a href="https://majdalkilany.github.io/book Store/build"> here</a>
+See the Book-Store project <a href="https://bookstore-cuwm.onrender.com/"> here</a>
 
 <!-- GETTING STARTED -->
 
@@ -62,7 +59,7 @@ Running this project on your computer.
 To get a local copy up and running, follow these steps:
 
 - Clone this repository
-  run `git clone https://github.com/majdalkilany/book Store`
+  run `git clone https://github.com/majdalkilany/bookStore`
 
 - Follow the steps in **Setup** below
 
