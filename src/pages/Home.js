@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import CreateBook from '../components/CreateBook';
 import BooksList from '../components/BooksList';
 
+import { addBook } from '../redux/store';
+
 export default function Home() {
-  const [books, setBooks] = useState([]);
+  const dispatch = useDispatch();
 
   const handleCreateBook = (book) => {
-    setBooks([...books, book]);
+    dispatch(addBook(book));
   };
-  const handleDeleteBook = (title) => {
-    const updatedBooks = books.filter((bookToDelete) => title !== bookToDelete.title);
-    setBooks(updatedBooks);
-  };
+
   return (
     <div>
-      <BooksList books={books} handleDeleteBook={handleDeleteBook} />
+      <BooksList />
       <CreateBook handleCreateBook={handleCreateBook} />
     </div>
   );

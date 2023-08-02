@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { addBook } from '../redux/store';
 
-export default function CreateBook({ handleCreateBook }) {
-  const [title, setTitle] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+export default function CreateBook() {
+  const dispatch = useDispatch();
+  const [category, setCategory] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
     const newBook = {
-      title,
-      selectedCategory,
+      title: event.target.bookTitle.value,
+      author: event.target.bookAuthor.value,
+      category,
     };
-    handleCreateBook(newBook);
-    setTitle('');
-    setSelectedCategory('');
+    dispatch(addBook(newBook));
+    event.target.reset();
+    setCategory('');
   };
 
   return (
@@ -23,29 +25,29 @@ export default function CreateBook({ handleCreateBook }) {
           type="text"
           id="bookTitle"
           name="bookTitle"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
           placeholder="Book title"
           required
         />
+        <input
+          type="text"
+          id="bookAuthor"
+          name="bookAuthor"
+          placeholder="Book author"
+          required
+        />
         <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           required
         >
           <option value="" disabled>
             Select a category
           </option>
-          <option value="category  1">category 1</option>
-          <option value="category  2">category 2</option>
-          <option value="category  3">category 3</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Nonfiction">Nonfiction 2</option>
         </select>
         <button type="submit"> ADD BOOK</button>
       </form>
     </div>
   );
 }
-
-CreateBook.propTypes = {
-  handleCreateBook: PropTypes.func.isRequired,
-};
