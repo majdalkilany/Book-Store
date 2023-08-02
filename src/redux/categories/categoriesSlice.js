@@ -4,8 +4,7 @@ const categoriesSlice = createSlice({
   name: 'categories',
   initialState: [],
   reducers: {
-    // eslint-disable-next-line no-unused-vars
-    categoriesStatus(state, action) {
+    categoriesStatus() {
       return 'Under construction';
     },
   },
