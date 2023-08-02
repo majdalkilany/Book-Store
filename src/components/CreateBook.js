@@ -5,16 +5,20 @@ import { addBook } from '../redux/store';
 export default function CreateBook() {
   const dispatch = useDispatch();
   const [category, setCategory] = useState('');
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
     const newBook = {
-      title: event.target.bookTitle.value,
-      author: event.target.bookAuthor.value,
+      title,
+      author,
       category,
     };
     dispatch(addBook(newBook));
     event.target.reset();
     setCategory('');
+    setTitle('');
+    setAuthor('');
   };
 
   return (
@@ -26,6 +30,8 @@ export default function CreateBook() {
           id="bookTitle"
           name="bookTitle"
           placeholder="Book title"
+          onChange={(event) => setTitle(event.target.value)}
+          value={title}
           required
         />
         <input
@@ -33,6 +39,8 @@ export default function CreateBook() {
           id="bookAuthor"
           name="bookAuthor"
           placeholder="Book author"
+          onChange={(event) => setAuthor(event.target.value)}
+          value={author}
           required
         />
         <select
