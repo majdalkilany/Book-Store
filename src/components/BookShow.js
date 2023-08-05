@@ -69,7 +69,7 @@ const BookShow = ({
           Current Chapter
         </span>
         <span className="Current-Lesson Text-Style-4">
-          Chapter3: ALessonLearned
+          Chapter3
         </span>
         <button type="button" className="Rectangle-2">
           {' '}
