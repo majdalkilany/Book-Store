@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addBook } from '../redux/store';
+import { createBook } from '../redux/store';
 
 export default function CreateBook() {
   const dispatch = useDispatch();
@@ -14,11 +14,15 @@ export default function CreateBook() {
       author,
       category,
     };
-    dispatch(addBook(newBook));
-    event.target.reset();
-    setCategory('');
-    setTitle('');
-    setAuthor('');
+    try {
+      dispatch(createBook(newBook));
+      event.target.reset();
+      setCategory('');
+      setTitle('');
+      setAuthor('');
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   return (
