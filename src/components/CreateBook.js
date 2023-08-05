@@ -1,18 +1,28 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { createBook } from '../redux/store';
 
-export default function CreateBook({ handleCreateBook }) {
+export default function CreateBook() {
+  const dispatch = useDispatch();
+  const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [author, setAuthor] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
     const newBook = {
       title,
-      selectedCategory,
+      author,
+      category,
     };
-    handleCreateBook(newBook);
-    setTitle('');
-    setSelectedCategory('');
+    try {
+      dispatch(createBook(newBook));
+      event.target.reset();
+      setCategory('');
+      setTitle('');
+      setAuthor('');
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   return (
@@ -23,29 +33,33 @@ export default function CreateBook({ handleCreateBook }) {
           type="text"
           id="bookTitle"
           name="bookTitle"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
           placeholder="Book title"
+          onChange={(event) => setTitle(event.target.value)}
+          value={title}
+          required
+        />
+        <input
+          type="text"
+          id="bookAuthor"
+          name="bookAuthor"
+          placeholder="Book author"
+          onChange={(event) => setAuthor(event.target.value)}
+          value={author}
           required
         />
         <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           required
         >
           <option value="" disabled>
             Select a category
           </option>
-          <option value="category  1">category 1</option>
-          <option value="category  2">category 2</option>
-          <option value="category  3">category 3</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Nonfiction">Nonfiction 2</option>
         </select>
         <button type="submit"> ADD BOOK</button>
       </form>
     </div>
   );
 }
-
-CreateBook.propTypes = {
-  handleCreateBook: PropTypes.func.isRequired,
-};

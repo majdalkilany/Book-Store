@@ -1,26 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import BookShow from './BookShow';
+import { getAllBooks } from '../redux/store';
 
-export default function BooksList({ books, handleDeleteBook }) {
-  const handleDelete = (title) => {
-    handleDeleteBook(title);
-  };
+export default function BooksList() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBooks());
+  }, [dispatch]);
+  const books = useSelector((state) => state.books);
+
   return (
     <div>
-      {books.map((book) => (
-        <BookShow key={book.title} book={book} handleDeleteBook={handleDelete} />
+      {Object.keys(books).map((key) => (
+        <div key={key}>
+          {books[key].map((book) => (
+            <BookShow key={key} book={book} item_id={key} />
+          ))}
+        </div>
       ))}
     </div>
   );
 }
-
-const Book = PropTypes.shape({
-  title: PropTypes.string.isRequired,
-  selectedCategory: PropTypes.string.isRequired,
-});
-
-BooksList.propTypes = {
-  books: PropTypes.arrayOf(Book).isRequired,
-  handleDeleteBook: PropTypes.func.isRequired,
-};

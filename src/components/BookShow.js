@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
-const BookShow = ({ handleDeleteBook, book: { title, selectedCategory } }) => {
-  const handleDeleteClick = () => {
-    handleDeleteBook(title);
-  };
+import { deleteBook } from '../redux/store';
+
+const BookShow = ({
+  book: {
+    title, author, category,
+  }, item_id,
+}) => {
+  const dispatch = useDispatch();
+
   return (
 
     <div>
@@ -14,12 +20,26 @@ const BookShow = ({ handleDeleteBook, book: { title, selectedCategory } }) => {
 
       </h4>
       <h4>
-        Category :
+        Author:
         {' '}
-        {selectedCategory}
+        {author}
 
       </h4>
-      <button onClick={handleDeleteClick} type="button">Delete </button>
+      <h4>
+        Category :
+        {' '}
+        {category}
+
+      </h4>
+      <button
+        onClick={() => {
+          dispatch(deleteBook({ item_id }));
+        }}
+        type="button"
+      >
+        Delete
+
+      </button>
 
     </div>
 
@@ -27,12 +47,14 @@ const BookShow = ({ handleDeleteBook, book: { title, selectedCategory } }) => {
 };
 const BookShape = PropTypes.shape({
   title: PropTypes.string.isRequired,
-  selectedCategory: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
 });
 
 BookShow.propTypes = {
   book: BookShape.isRequired,
-  handleDeleteBook: PropTypes.func.isRequired,
+  item_id: PropTypes.string.isRequired,
+
 };
 
 export default BookShow;

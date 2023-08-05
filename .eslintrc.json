@@ -26,7 +26,9 @@
     "no-extraneous-dependencies": "off",
     "import/no-extraneous-dependencies": "off",
     "react/no-array-index-key": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "camelcase": "off",
+    "import/prefer-default-export": "off"
   },
   "overrides": [
     {
