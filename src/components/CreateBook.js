@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBook } from '../redux/store';
 
+import './createBook.css';
+
 export default function CreateBook() {
   const dispatch = useDispatch();
   const [category, setCategory] = useState('');
@@ -28,8 +30,9 @@ export default function CreateBook() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h4>ADD NEW BOOK </h4>
+        <h4 className="Title-h4 Text-Style-12">ADD NEW BOOK </h4>
         <input
+          className="title-field "
           type="text"
           id="bookTitle"
           name="bookTitle"
@@ -40,6 +43,7 @@ export default function CreateBook() {
         />
         <input
           type="text"
+          className="title-field "
           id="bookAuthor"
           name="bookAuthor"
           placeholder="Book author"
@@ -48,17 +52,18 @@ export default function CreateBook() {
           required
         />
         <select
+          className="category-field"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           required
         >
-          <option value="" disabled>
+          <option value="" disabled className="category">
             Select a category
           </option>
           <option value="Fiction">Fiction</option>
           <option value="Nonfiction">Nonfiction 2</option>
         </select>
-        <button type="submit"> ADD BOOK</button>
+        <button type="submit" className="Rect"> ADD BOOK</button>
       </form>
     </div>
   );
